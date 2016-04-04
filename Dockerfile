@@ -2,41 +2,36 @@ FROM ubuntu:14.04
 
 # Dependencies we just need for building phantomjs
 ENV buildDependencies\
-  wget unzip python build-essential g++ flex bison gperf\
-  ruby perl libsqlite3-dev libssl-dev libpng-dev
+  python build-essential g++ flex bison gperf manpages \
+  ruby perl libsqlite3-dev libssl-dev libpng-dev git
 
 # Dependencies we need for running phantomjs
 ENV phantomJSDependencies\
-  libicu-dev libfontconfig1-dev libjpeg-dev libfreetype6
+  libicu-dev libfontconfig1-dev libjpeg-dev libfreetype6 wget
+
+ENV phantomjsGitUrl git://github.com/ariya/phantomjs
+ENV phantomjsGitBranch 842715be9d2bb27865c179c12761290fa3f2929c
 
 # Installing phantomjs
-RUN \
-    # Installing dependencies
-    apt-get update -yqq \
-&&  apt-get install -fyqq ${buildDependencies} ${phantomJSDependencies}\
-    # Downloading src, unzipping & removing zip
-&&  mkdir phantomjs \
-&&  cd phantomjs \
-&&  wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.0.0-source.zip \
-&&  unzip phantomjs-2.0.0-source.zip \
-&&  rm -rf /phantomjs/phantomjs-2.0.0-source.zip \
-    # Building phantom
-&&  cd phantomjs-2.0.0/ \
-&&  ./build.sh --confirm --silent \
-    # Removing everything but the binary
-&&  ls -A | grep -v bin | xargs rm -rf \
-    # Symlink phantom so that we are able to run `phantomjs`
-&&  ln -s /phantomjs/phantomjs-2.0.0/bin/phantomjs /usr/local/share/phantomjs \
-&&  ln -s /phantomjs/phantomjs-2.0.0/bin/phantomjs /usr/local/bin/phantomjs \
-&&  ln -s /phantomjs/phantomjs-2.0.0/bin/phantomjs /usr/bin/phantomjs \
-    # Removing build dependencies, clean temporary files
-&&  apt-get purge -yqq ${buildDependencies} \
-&&  apt-get autoremove -yqq \
-&&  apt-get clean \
-&&  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    # Checking if phantom works
-&&  phantomjs -v
+RUN ( \
+	apt-get update -yqq && \
+	apt-get install -fyqq ${buildDependencies} ${phantomJSDependencies} \
+    ) && ( \
+	git clone ${phantomjsGitUrl} phantomjs2 && \
+	cd phantomjs2 && \
+	git checkout ${phantomjsGitBranch} && \
+	time ./build.py --confirm --silent --release && \
+	ls -A | grep -v bin | xargs rm -rf && \
+	ln -s /phantomjs2/bin/phantomjs /usr/local/share/phantomjs && \
+	ln -s /phantomjs2/bin/phantomjs /usr/local/bin/phantomjs && \
+	ln -s /phantomjs2/bin/phantomjs /usr/bin/phantomjs \
+    ) && ( \
+	apt-get autoremove --purge -yqq ${buildDependencies} && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/*.log /var/log/apt/*.log  \
+    ) && \
+    phantomjs -v
 
 CMD \
-    echo "phantomjs binary is located at /phantomjs/phantomjs-2.0.0/bin/phantomjs"\
+    echo "phantomjs binary is located at /phantomjs2/bin/phantomjs"\
 &&  echo "just run 'phantomjs' (version `phantomjs -v`)"
