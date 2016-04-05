@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 # Dependencies we just need for building phantomjs
 ENV buildDependencies\
   python build-essential g++ flex bison gperf manpages \
-  ruby perl libsqlite3-dev libssl-dev libpng-dev git time sudo su
+  ruby perl libsqlite3-dev libssl-dev libpng-dev git time
 
 # Dependencies we need for running phantomjs
 ENV phantomJSDependencies\
@@ -26,7 +26,7 @@ RUN ( \
 	ln -s /phantomjs2/bin/phantomjs /usr/local/bin/phantomjs && \
 	ln -s /phantomjs2/bin/phantomjs /usr/bin/phantomjs \
     ) && ( \
-	apt-get autoremove --purge -yqq ${buildDependencies} && \
+	apt-get autoremove --purge -yqq sudo ${buildDependencies} && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/*.log /var/log/apt/*.log  \
     ) && \
@@ -39,6 +39,7 @@ ADD start.sh /
 RUN adduser --gecos "java" --disabled-password --disabled-login dockeruser
 RUN chown -R dockeruser /application/
 USER dockeruser
+RUN chmod -R a-s /
 
 WORKDIR /application
 
