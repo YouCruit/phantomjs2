@@ -32,6 +32,8 @@ RUN ( \
     ) && \
     phantomjs -v
 
+EXPOSE 5050
+
 ADD start.sh /
 
 CMD ./start.sh
