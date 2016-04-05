@@ -3,11 +3,11 @@ FROM ubuntu:15.10
 # Dependencies we just need for building phantomjs
 ENV buildDependencies\
   python build-essential g++ flex bison gperf manpages \
-  ruby perl libsqlite3-dev libssl-dev libpng-dev git time
+  ruby perl libsqlite3-dev libssl-dev libpng-dev git time libicu-dev libjpeg-dev libfontconfig1-dev
 
 # Dependencies we need for running phantomjs
 ENV phantomJSDependencies\
-  libicu-dev libfontconfig1-dev libjpeg-dev libfreetype6 wget libsqlite3-0
+  libfreetype6 wget libsqlite3-0 libicu55 libjpeg8 libfontconfig1
 
 ENV phantomjsGitUrl git://github.com/ariya/phantomjs
 ENV phantomjsGitBranch 842715be9d2bb27865c179c12761290fa3f2929c
