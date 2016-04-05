@@ -30,6 +30,7 @@ RUN ( \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/*.log /var/log/apt/*.log  \
     ) && \
+    ldd /usr/bin/phantomjs && \
     phantomjs -v
 
 EXPOSE 5050
