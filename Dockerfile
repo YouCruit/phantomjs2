@@ -20,8 +20,7 @@ EXPOSE 5050
 
 ADD start.sh /
 
-RUN adduser --gecos "java" --disabled-password --disabled-login dockeruser
-RUN chown -R dockeruser /application/
+RUN mkdir -p /application && adduser --gecos "java" --disabled-password --disabled-login dockeruser && chown -R dockeruser /application/
 USER dockeruser
 RUN chmod -R a-s /
 
