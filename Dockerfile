@@ -32,6 +32,6 @@ RUN ( \
     ) && \
     phantomjs -v
 
-CMD \
-    echo "phantomjs binary is located at /phantomjs2/bin/phantomjs"\
-&&  echo "just run 'phantomjs' (version `phantomjs -v`)"
+ADD start.sh /
+
+CMD ./start.sh
