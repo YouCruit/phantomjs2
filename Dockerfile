@@ -7,7 +7,7 @@ ENV buildDependencies\
 
 # Dependencies we need for running phantomjs
 ENV phantomJSDependencies\
-  libfreetype6 wget libsqlite3-0 libicu55 libjpeg8 libfontconfig1
+  libfreetype6 wget libsqlite3-0 libicu55 libjpeg8 libfontconfig1 libpng12-0
 
 ENV phantomjsGitUrl git://github.com/ariya/phantomjs
 ENV phantomjsGitBranch 842715be9d2bb27865c179c12761290fa3f2929c
