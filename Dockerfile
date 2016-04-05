@@ -22,7 +22,7 @@ ADD start.sh /
 
 RUN mkdir -p /application && adduser --gecos "java" --disabled-password --disabled-login dockeruser && chown -R dockeruser /application/
 USER dockeruser
-RUN chmod -R a-s /
+RUN chmod -R a-s /bin /sbin /usr
 
 WORKDIR /application
 
