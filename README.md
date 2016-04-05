@@ -1,12 +1,12 @@
 # Docker-ized PhantomJS 2.2
 
-A Dockerfile to build [PhantomJS](https://github.com/ariya/phantomjs) 2.0.0 for Linux from source.
+A Dockerfile to build [PhantomJS](https://github.com/ariya/phantomjs) 2.2.0-develop for Linux from source.
 
 ## How do I get the image?
-There is an [Automated Build on hub.docker.com](https://registry.hub.docker.com/u/YouCruit/phantomjs2/), so getting the image is easy:
+There is an [Automated Build on hub.docker.com](https://registry.hub.docker.com/u/youcruit/phantomjs2/), so getting the image is easy:
 
 ```
-docker pull Youcruit/phantomjs2.2:latest
+docker pull youcruit/phantomjs2.2:latest
 ```
 
 ## How do I use it?
@@ -14,7 +14,7 @@ docker pull Youcruit/phantomjs2.2:latest
 #### Option 1: Run it from inside a Docker container
 
 ```bash
-docker run YouCruit/phantomjs2.2 phantomjs -v
+docker run youcruit/phantomjs2.2 phantomjs -v
 ```
 
 
@@ -27,8 +27,8 @@ docker run YouCruit/phantomjs2.2 phantomjs -v
 
 2. Extract binary
 
-        docker pull YouCruit/phantomjs2.2:latest
-        docker run -name temp YouCruit/phantomjs2.2
+        docker pull youcruit/phantomjs2.2:latest
+        docker run -name temp youcruit/phantomjs2.2
         docker cp temp:phantomjs/phantomjs2/bin/phantomjs ~/phantomjs
 
 
