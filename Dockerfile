@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 # Dependencies we just need for building phantomjs
 ENV buildDependencies\
   python build-essential g++ flex bison gperf manpages \
-  ruby perl libsqlite3-dev libssl-dev libpng-dev git
+  ruby perl libsqlite3-dev libssl-dev libpng-dev git time
 
 # Dependencies we need for running phantomjs
 ENV phantomJSDependencies\
