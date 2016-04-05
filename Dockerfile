@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 # Dependencies we just need for building phantomjs
 ENV buildDependencies\
   python build-essential g++ flex bison gperf manpages \
-  ruby perl libsqlite3-dev libssl-dev libpng-dev git time
+  ruby perl libsqlite3-dev libssl-dev libpng-dev git time sudo su
 
 # Dependencies we need for running phantomjs
 ENV phantomJSDependencies\
@@ -35,5 +35,12 @@ RUN ( \
 EXPOSE 5050
 
 ADD start.sh /
+
+RUN adduser --gecos "java" --disabled-password --disabled-login dockeruser
+RUN chown -R dockeruser /application/
+USER dockeruser
+
+WORKDIR /application
+
 
 CMD ./start.sh
