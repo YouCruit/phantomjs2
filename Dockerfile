@@ -18,13 +18,13 @@ RUN /install_phantomjs.sh
 
 EXPOSE 5050
 
-ADD start.sh /
 
 RUN mkdir -p /application && adduser --gecos "java" --disabled-password --disabled-login dockeruser && chown -R dockeruser /application/
 RUN chmod -R a-s /bin /sbin /usr
 USER dockeruser
 
 WORKDIR /application
+ADD start.sh /application
 
 
-CMD ./start.sh
+CMD /application/start.sh
