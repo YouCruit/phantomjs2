@@ -1,4 +1,4 @@
-FROM ubuntu:15.10
+FROM ubuntu:16.04
 
 # Dependencies we just need for building phantomjs
 ENV buildDependencies\
