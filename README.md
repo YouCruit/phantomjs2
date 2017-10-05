@@ -1,3 +1,5 @@
+[![](https://dockerbuildbadges.quelltext.eu/status.svg?organization=youcruit&repository=phantomjs2)](https://hub.docker.com/r/youcruit/phantomjs2/builds/)
+
 # Docker-ized PhantomJS 2.2
 
 A Dockerfile to build [PhantomJS](https://github.com/ariya/phantomjs) 2.2.0-develop for Linux from source.
